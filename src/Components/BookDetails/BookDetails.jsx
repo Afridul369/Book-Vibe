@@ -1,6 +1,11 @@
 import React from 'react'
 import { useLoaderData, useParams } from 'react-router'
 import { addToStore } from '../../Utilities/localStorageDB'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
+
 
 const BookDetails = () => {
     const {id} = useParams()
@@ -8,7 +13,13 @@ const BookDetails = () => {
     const data = useLoaderData()
     const bookDetails = data.find(book=> book.bookId === convertedToNumber)
     const { bookId, author, bookName, category,publisher, image, rating, review,tags,totalPages,yearOfPublishing } = bookDetails
+    
     const handleMarkRead = (id)=>{
+        MySwal.fire({
+        title: "Good job!",
+        text: "You clicked the button!",
+        icon: "success"
+        });
         addToStore(id)
     }
 
